@@ -1,35 +1,34 @@
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import { useEffect } from "react"
+import FirstContact from "./pages/FirstContact"
+import Home from "./pages/Home"
+import AiWorkflows from "./pages/AiWorkflows"
+import Architecture from "./pages/Architecture"
+import "./components/HomeStyles.css"
+import "./components/MobileStyles.css"
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { AnimationState } from './types';
-import Experience from './components/Experience';
-import Overlay from './components/Overlay';
-
-const App: React.FC = () => {
-  const [phase, setPhase] = useState<AnimationState>(AnimationState.LOOPING);
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    // Sequence timing
-    const timers = [
-      setTimeout(() => setPhase(AnimationState.SHATTERING), 1500),
-      setTimeout(() => setPhase(AnimationState.ACCELERATING), 2000),
-      setTimeout(() => setPhase(AnimationState.REVEALED), 3500)
-    ];
+    // Immediate reset
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-    return () => timers.forEach(clearTimeout);
-  }, []);
+  return null;
+}
 
+export default function App() {
   return (
-    <div className="relative w-screen h-screen bg-slate-950 overflow-hidden">
-      {/* 3D Background Layer */}
-      <Experience phase={phase} />
-
-      {/* 2D UI Overlay Layer */}
-      <Overlay phase={phase} />
-      
-      {/* Cinematic Vignette */}
-      <div className="pointer-events-none absolute inset-0 z-50 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.8)_100%)]" />
-    </div>
-  );
-};
-
-export default App;
+    <BrowserRouter basename="/D-tul">
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* DTUL/Product route removed as it was a dummy */}
+        <Route path="/first-contact" element={<FirstContact />} />
+        <Route path="/ai-workflows" element={<AiWorkflows />} />
+        <Route path="/architecture" element={<Architecture />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}

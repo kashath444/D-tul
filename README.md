@@ -1,20 +1,29 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# DTUL: The Architect's Breakout
 
-# Run and deploy your AI Studio app
+## Project Overview
+This project contains the D-TUL digital ecosystem, featuring a high-fidelity 3D product experience and a structured technical home page.
 
-This contains everything you need to run your app locally.
+## Site Map
 
-View your app in AI Studio: https://ai.studio/apps/drive/14Ebv_6DOcE_UCKRs5HWxHsptfTw-qn_c
+### 1. Home Page (`/`)
+- **Source**: Integrated from `@dtul---technical-engineering-void`.
+- **Description**: Technical "Void" theme with boot sequence, manifest, and arsenal.
+- **Key Components**: `Hero`, `Manifest`, `Arsenal`, `Loading` (Boot Sequence).
+- **Styles**: Scoped to `.home_scope` via `components/HomeStyles.css`.
 
-## Run Locally
+### 2. First Contact Page (`/first-contact`)
+- **Description**: 3D interactive experience (formerly linked as Product).
+- **Key Components**: `Experience`, `Overlay`.
+- **Access**: Via "Work" Dropdown or "Handbook First Contact" in Arsenal.
 
-**Prerequisites:**  Node.js
+## Integration Notes
+- **Namespace Isolation**: The Home Page styles are strictly scoped. Global styles in `index.html` primarily serve the Product Page but are compatible.
+- **Routing**: `react-router-dom` handles navigation.
+- **Security**: Strict CSP implemented in `index.html`.
 
+## Development
+- `npm run dev`: Start Vite development server.
+- `npm run build`: Build for production.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Archives
+- Original v1 entry points (`App.tsx`, `index.tsx`) are archived in `src/archive/original-v1`.

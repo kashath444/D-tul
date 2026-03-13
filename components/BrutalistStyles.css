@@ -1,0 +1,253 @@
+:root {
+    --bg-color: #000000;
+    --headline-color: #F2F2F2;
+    --body-color: #B0B0B0;
+    --accent-color: #E10600;
+    --font-headline: 'Anton', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
+.brutalist-hero {
+    background-color: transparent;
+    color: var(--headline-color);
+    min-height: 100vh;
+    padding: 8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 1024px) {
+    .hero-main-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.headline-wrapper {
+    flex: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.hero-headline {
+    font-family: var(--font-headline);
+    font-size: clamp(3rem, 12vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--headline-color);
+}
+
+.hero-headline span {
+    display: block;
+}
+
+.glitch-text {
+    position: relative;
+    display: inline-block;
+    font-size: 1.1em;
+    /* Larger as requested */
+}
+
+/* One-time glitch effect */
+.glitch-text::before,
+.glitch-text::after {
+    content: "QUESTIONS";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.glitch-active .glitch-text::before {
+    animation: glitch-anim-1 0.6s steps(1);
+    color: var(--accent-color);
+    z-index: -1;
+}
+
+.glitch-active .glitch-text::after {
+    animation: glitch-anim-2 0.6s steps(1);
+    color: var(--headline-color);
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        opacity: 1;
+        transform: translate(-2px, 0);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(2px, 0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translate(-4px, 0);
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        opacity: 1;
+        transform: translate(2px, 0);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-2px, 0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translate(4px, 0);
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.divider-line {
+    width: 60%;
+    height: 1px;
+    background-color: var(--accent-color);
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeIn 600ms ease-out 800ms forwards;
+}
+
+.home_scope .philosophy-block {
+    max-width: 450px;
+    padding-top: 2.2rem;
+    /* Optical alignment with headline cap-height */
+    opacity: 0;
+    animation: fadeIn 600ms ease-out 1000ms forwards;
+}
+
+.home_scope .philosophy-label {
+    font-family: var(--font-mono) !important;
+    font-size: 13px !important;
+    color: var(--accent-color) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.home_scope .philosophy-body {
+    font-family: var(--font-mono) !important;
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+    color: var(--body-color) !important;
+    margin: 0 !important;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInPulse {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        animation: pulse 4s infinite 1s;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Mobile UI Refinements */
+@media (max-width: 768px) {
+    .home_scope .brutalist-hero {
+        padding-top: 140px !important;
+        /* Increased significantly to ensure overlap fix */
+        padding-inline: 6vw;
+        justify-content: flex-start;
+    }
+
+    .home_scope .hero-headline {
+        font-size: clamp(2.0rem, 13vw, 3.0rem) !important;
+        /* Slightly smaller for mobile */
+        line-height: 1.1 !important;
+    }
+
+    .home_scope .philosophy-block {
+        max-width: 100% !important;
+        padding-top: 0 !important;
+        margin-top: 1.5rem;
+    }
+
+    .home_scope .philosophy-label {
+        font-size: 10px !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .home_scope .philosophy-body {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+    }
+}
