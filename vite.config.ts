@@ -6,7 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/D-tul/',
+    // Use root base during local dev (`/`) so assets load correctly.
+    // Use relative base for production so the site works when served from a subpath.
+    // (This avoids 404s when opening deployed files via GitHub Pages or similar.)
+    base: mode === 'production' ? './' : '/',
     server: {
     },
     plugins: [
