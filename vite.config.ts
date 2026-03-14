@@ -6,10 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
-    // Use root base during local dev (`/`) so assets load correctly.
-    // Use relative base for production so the site works when served from a subpath.
-    // (This avoids 404s when opening deployed files via GitHub Pages or similar.)
-    base: mode === 'production' ? './' : '/',
+    // Vercel natively hosts apps at the root domain, so we strictly use '/' for the base path.
+    base: '/',
     cacheDir: './.vite', // Force local cache to bypass global temp path issues with apostrophes
     server: {
       port: 4000,
