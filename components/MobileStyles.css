@@ -100,3 +100,62 @@
         align-items: center !important;
     }
 }
+
+/* ── Architecture Page Responsive ── */
+@media (max-width: 768px) {
+    .arch-corner-tl,
+    .arch-corner-br {
+        display: none;
+    }
+
+    .arch-scanline {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .arch-bg::before {
+        background-size: 40px 40px;
+    }
+
+    .arch-bg::after {
+        display: none;
+    }
+
+    .arch-particle {
+        display: none;
+    }
+}
+
+/* ── AI Workflows Responsive ── */
+@media (max-width: 480px) {
+    .wf-scope .wf-hero-title {
+        font-size: 1.6rem !important;
+    }
+
+    .wf-scope .wf-card {
+        padding: 18px 14px !important;
+    }
+}
+
+/* ── General Touch Target Sizing ── */
+@media (max-width: 768px) {
+    a, button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* ── Prevent Horizontal Overflow Everywhere ── */
+html, body {
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}

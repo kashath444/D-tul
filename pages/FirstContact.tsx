@@ -4,7 +4,8 @@ import Experience from "../components/Experience"
 import Overlay from "../components/Overlay"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import NoiseToStructure from "../components/NoiseToStructure"
+import EntropyFilter from "../components/EntropyFilter"
+import ThroughputVisual from "../components/ThroughputVisual"
 
 export default function FirstContact() {
     const [phase, setPhase] = useState<AnimationState>(AnimationState.LOOPING)
@@ -59,7 +60,8 @@ export default function FirstContact() {
                     <div className="pointer-events-none absolute inset-0 z-50 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.8)_100%)]" />
                 </section>
 
-                <NoiseToStructure />
+                <EntropyFilter />
+                <ThroughputVisual />
             </main>
 
             <Footer ref={footerRef} theme="sky" />

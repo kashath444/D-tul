@@ -10,7 +10,10 @@ export default defineConfig(({ mode }) => {
     // Use relative base for production so the site works when served from a subpath.
     // (This avoids 404s when opening deployed files via GitHub Pages or similar.)
     base: mode === 'production' ? './' : '/',
+    cacheDir: './.vite', // Force local cache to bypass global temp path issues with apostrophes
     server: {
+      port: 4000,
+      strictPort: false,
     },
     plugins: [
       react(),

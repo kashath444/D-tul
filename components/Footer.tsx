@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface FooterProps {
-    theme?: 'crimson' | 'sky';
+    theme?: 'crimson' | 'sky' | 'purple' | 'green';
 }
 
 const Footer = forwardRef<HTMLElement, FooterProps>(({ theme = 'crimson' }, ref) => {
@@ -28,9 +28,11 @@ const Footer = forwardRef<HTMLElement, FooterProps>(({ theme = 'crimson' }, ref)
     };
 
     const isSky = theme === 'sky';
-    const accentColor = isSky ? '#38bdf8' : 'var(--deep-crimson)';
-    const borderColor = isSky ? '#1e293b' : '#4a0404';
-    const logoColor = isSky ? '#0ea5e9' : '#4a0404';
+    const isPurple = theme === 'purple';
+    const isGreen = theme === 'green';
+    const accentColor = isGreen ? '#22c55e' : isPurple ? '#a855f7' : isSky ? '#38bdf8' : 'var(--deep-crimson)';
+    const borderColor = isGreen ? 'rgba(34, 197, 94, 0.2)' : isPurple ? 'rgba(168, 85, 247, 0.2)' : isSky ? '#1e293b' : '#4a0404';
+    const logoColor = isGreen ? '#15803d' : isPurple ? '#7c3aed' : isSky ? '#0ea5e9' : '#4a0404';
 
     return (
         <footer
@@ -98,16 +100,15 @@ const Footer = forwardRef<HTMLElement, FooterProps>(({ theme = 'crimson' }, ref)
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <p className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '13px', color: '#666', fontWeight: 'bold', letterSpacing: '0.1em' }}>RESOURCES</p>
-                    {['DOCUMENTATION', 'VERSION_LOGS', 'SYSTEM_STATUS'].map(l => (
-                        <a key={l} href="#" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ {l} ]</a>
-                    ))}
+                    <Link to="/documentation" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ DOCUMENTATION ]</Link>
+                    <Link to="/version-logs" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ VERSION_LOGS ]</Link>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <p className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '13px', color: '#666', fontWeight: 'bold', letterSpacing: '0.1em' }}>LEGAL</p>
-                    {['PRIVACY', 'TERMS', 'LICENSING'].map(l => (
-                        <a key={l} href="#" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ {l} ]</a>
-                    ))}
+                    <Link to="/privacy" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ PRIVACY ]</Link>
+                    <Link to="/terms" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ TERMS ]</Link>
+                    <Link to="/licensing" className="mono" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '14px', color: accentColor, fontWeight: 'bold', textDecoration: 'none', letterSpacing: '0.1em' }}>[ LICENSING ]</Link>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -133,7 +134,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(({ theme = 'crimson' }, ref)
                 display: 'flex',
                 justifyContent: 'space-between',
                 pointerEvents: 'none',
-                borderTop: `1px solid ${isSky ? '#0f172a' : '#1a1a1a'}`,
+                borderTop: `1px solid ${isGreen ? 'rgba(34, 197, 94, 0.12)' : isPurple ? 'rgba(168, 85, 247, 0.12)' : isSky ? '#0f172a' : '#1a1a1a'}`,
                 paddingTop: '30px'
             }}>
                 <div className="mono flicker-metadata" style={{ fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '13px', color: accentColor, fontWeight: 'bold', letterSpacing: '0.1em' }}>

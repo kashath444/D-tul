@@ -34,8 +34,7 @@ const Arsenal: React.FC = () => {
                             id="02"
                             title="AI Workflows"
                             desc="Practical frameworks for integrating machine intelligence into human execution streams."
-                            statusText="COMING SOON"
-                            isDimmed
+                            statusText="ACCESS NOW"
                         />
                     </Link>
                     <Link to="/architecture" style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
@@ -43,8 +42,7 @@ const Arsenal: React.FC = () => {
                             id="03"
                             title="Landing Page Architecture"
                             desc="High-impact structural systems designed for conversion through absolute clarity."
-                            statusText="COMING SOON"
-                            isDimmed
+                            statusText="ACCESS NOW"
                         />
                     </Link>
                 </div>

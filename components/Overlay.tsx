@@ -46,9 +46,9 @@ const Overlay: React.FC<OverlayProps> = ({ phase }) => {
            <div className="text-left">
              <h3 className="font-serif text-lg text-white mb-1">The First Contact</h3>
              <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-3">Blueprint for Breakout</p>
-             <button className="px-3 py-1 bg-white text-slate-950 text-[10px] font-bold uppercase rounded hover:bg-sky-400 transition-colors">
+             <a href="/#contact" className="px-3 py-1 bg-white text-slate-950 text-[10px] font-bold uppercase rounded hover:bg-sky-400 transition-colors" style={{ textDecoration: 'none', display: 'inline-block' }}>
                Access Now
-             </button>
+             </a>
            </div>
 
            {/* Animated Gradient Beam */}

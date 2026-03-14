@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
     isVisible: boolean;
-    theme?: 'crimson' | 'sky';
+    theme?: 'crimson' | 'sky' | 'purple' | 'green';
 }
 
 const Header: React.FC<HeaderProps> = ({ isVisible, theme = 'crimson' }) => {
@@ -34,13 +34,16 @@ const Header: React.FC<HeaderProps> = ({ isVisible, theme = 'crimson' }) => {
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     const isSky = theme === 'sky';
-    const accentColor = isSky ? '#38bdf8' : 'var(--deep-crimson)';
-    const borderColor = isSky ? '#1e293b' : '#4a0404';
-    const glowColor = isSky ? 'rgba(56, 189, 248, 0.5)' : 'var(--deep-crimson)';
+    const isPurple = theme === 'purple';
+    const isGreen = theme === 'green';
+    const accentColor = isGreen ? '#22c55e' : isPurple ? '#a855f7' : isSky ? '#38bdf8' : 'var(--deep-crimson)';
+    const borderColor = isGreen ? 'rgba(34, 197, 94, 0.2)' : isPurple ? 'rgba(168, 85, 247, 0.2)' : isSky ? '#1e293b' : '#4a0404';
+    const glowColor = isGreen ? 'rgba(34, 197, 94, 0.5)' : isPurple ? 'rgba(168, 85, 247, 0.5)' : isSky ? 'rgba(56, 189, 248, 0.5)' : 'var(--deep-crimson)';
 
     const navLinks = [
         { label: 'WORK', href: `${import.meta.env.BASE_URL}#arsenal`, isDropdown: true },
-        { label: 'READ', href: `${import.meta.env.BASE_URL}#read` },
+        { label: 'ABOUT', href: `${import.meta.env.BASE_URL}#read` },
+        { label: 'LOGS', href: '/version-logs', isRoute: true },
         { label: 'CONTACT', href: `${import.meta.env.BASE_URL}#contact` }
     ];
 
@@ -77,32 +80,60 @@ const Header: React.FC<HeaderProps> = ({ isVisible, theme = 'crimson' }) => {
                         onMouseEnter={() => item.isDropdown && setIsWorkOpen(true)}
                         onMouseLeave={() => item.isDropdown && setIsWorkOpen(false)}
                     >
-                        <a
-                            href={item.href}
-                            className="mono"
-                            onClick={(e) => handleNavClick(e, item.href)}
-                            style={{
-                                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-                                fontSize: '13px',
-                                color: (item.isDropdown && isWorkOpen) ? '#fff' : accentColor,
-                                fontWeight: 'bold',
-                                textDecoration: 'none',
-                                letterSpacing: '0.2em',
-                                transition: 'color 0.2s, text-shadow 0.2s',
-                                padding: '10px 0',
-                                display: 'block'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.color = '#fff';
-                                e.currentTarget.style.textShadow = `0 0 8px ${accentColor}`;
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.color = (item.isDropdown && isWorkOpen) ? '#fff' : accentColor;
-                                e.currentTarget.style.textShadow = 'none';
-                            }}
-                        >
-                            {item.label}
-                        </a>
+                        {(item as any).isRoute ? (
+                            <Link
+                                to={item.href}
+                                className="mono"
+                                style={{
+                                    fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                                    fontSize: '13px',
+                                    color: accentColor,
+                                    fontWeight: 'bold',
+                                    textDecoration: 'none',
+                                    letterSpacing: '0.2em',
+                                    transition: 'color 0.2s, text-shadow 0.2s',
+                                    padding: '10px 0',
+                                    display: 'block'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = '#fff';
+                                    e.currentTarget.style.textShadow = `0 0 8px ${accentColor}`;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = accentColor;
+                                    e.currentTarget.style.textShadow = 'none';
+                                }}
+                            >
+                                {item.label}
+                            </Link>
+                        ) : (
+                            <a
+                                href={item.href}
+                                className="mono"
+                                onClick={(e) => handleNavClick(e, item.href)}
+                                style={{
+                                    fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                                    fontSize: '13px',
+                                    color: (item.isDropdown && isWorkOpen) ? '#fff' : accentColor,
+                                    fontWeight: 'bold',
+                                    textDecoration: 'none',
+                                    letterSpacing: '0.2em',
+                                    transition: 'color 0.2s, text-shadow 0.2s',
+                                    padding: '10px 0',
+                                    display: 'block'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = '#fff';
+                                    e.currentTarget.style.textShadow = `0 0 8px ${accentColor}`;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = (item.isDropdown && isWorkOpen) ? '#fff' : accentColor;
+                                    e.currentTarget.style.textShadow = 'none';
+                                }}
+                            >
+                                {item.label}
+                            </a>
+                        )}
 
                         {/* Desktop Dropdown for WORK */}
                         {item.isDropdown && isWorkOpen && (
@@ -165,21 +196,36 @@ const Header: React.FC<HeaderProps> = ({ isVisible, theme = 'crimson' }) => {
                 }}>
                     {navLinks.map((item) => (
                         <div key={item.label} style={{ textAlign: 'center' }}>
-                            <a
-                                href={item.href}
-                                className="heading"
-                                onClick={(e) => {
-                                    handleNavClick(e, item.href);
-                                    setIsMobileMenuOpen(false);
-                                }}
-                                style={{
-                                    fontSize: '2rem',
-                                    color: '#fff',
-                                    textDecoration: 'none'
-                                }}
-                            >
-                                {item.label}
-                            </a>
+                            {(item as any).isRoute ? (
+                                <Link
+                                    to={item.href}
+                                    className="heading"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    style={{
+                                        fontSize: '2rem',
+                                        color: '#fff',
+                                        textDecoration: 'none'
+                                    }}
+                                >
+                                    {item.label}
+                                </Link>
+                            ) : (
+                                <a
+                                    href={item.href}
+                                    className="heading"
+                                    onClick={(e) => {
+                                        handleNavClick(e, item.href);
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    style={{
+                                        fontSize: '2rem',
+                                        color: '#fff',
+                                        textDecoration: 'none'
+                                    }}
+                                >
+                                    {item.label}
+                                </a>
+                            )}
                             {item.isDropdown && (
                                 <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                                     <Link
@@ -218,7 +264,7 @@ const Header: React.FC<HeaderProps> = ({ isVisible, theme = 'crimson' }) => {
 
 export default Header;
 
-const DropdownItem: React.FC<{ to: string; label: string; onClick: () => void; theme: 'crimson' | 'sky' }> = ({ to, label, onClick, theme }) => (
+const DropdownItem: React.FC<{ to: string; label: string; onClick: () => void; theme: 'crimson' | 'sky' | 'purple' | 'green' }> = ({ to, label, onClick, theme }) => (
     <Link to={to} className="mono" style={{
         fontFamily: "'JetBrains Mono', 'Courier New', monospace",
         padding: '10px 20px',
@@ -232,7 +278,7 @@ const DropdownItem: React.FC<{ to: string; label: string; onClick: () => void; t
     }}
         onMouseEnter={(e) => {
             e.currentTarget.style.color = '#fff';
-            e.currentTarget.style.backgroundColor = theme === 'sky' ? 'rgba(56, 189, 248, 0.2)' : 'rgba(74, 4, 4, 0.2)';
+            e.currentTarget.style.backgroundColor = theme === 'green' ? 'rgba(34, 197, 94, 0.2)' : theme === 'purple' ? 'rgba(168, 85, 247, 0.2)' : theme === 'sky' ? 'rgba(56, 189, 248, 0.2)' : 'rgba(74, 4, 4, 0.2)';
         }}
         onMouseLeave={(e) => {
             e.currentTarget.style.color = '#888';
